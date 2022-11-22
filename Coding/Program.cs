@@ -47,8 +47,6 @@
         string admin1 = "1061";
         string admin2 = "1008";
         Console.Clear();
-        string id = InputID();
-        string Password = InputPassword();
         Console.WriteLine("Are you admin?(Y/N)");
         string admin = Console.ReadLine();
         if(admin == "Y")
@@ -65,8 +63,13 @@
         }
         else if (admin == "N")
         {
+            string id = InputID();
+            string Password = InputPassword();
             ShowInsideLoginForUser();
         }
+        Console.WriteLine("===============================");
+        Console.Write("Please try again.");
+        Console.ReadLine();
         ShowLogin();
     }
     public static void ShowInsideLoginForAdmin()
