@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.Security.Cryptography;
 
-class PasswordHideUsers{
+class PasswordHide{
     public static string PasswordUsers()
     {
         Console.Clear();
@@ -36,9 +36,9 @@ class PasswordHideUsers{
             Console.ReadKey();
             BackToReturn();
             return null;
-        } 
-        
+        }   
     }
+    
     static string GetHiddenConsoleInput()
     {
         StringBuilder input = new StringBuilder();

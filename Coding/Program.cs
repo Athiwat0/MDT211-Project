@@ -195,7 +195,7 @@
             ShowInputUser();
             return;
         }
-        string Password = PasswordHideUsers.PasswordUsers();
+        string Password = PasswordHide.PasswordUsers();
         string Name = InputName();
         string Surname = InputSurname();
         string Number = InputNumber();
@@ -217,7 +217,7 @@
             ShowInputAdmin();
             return;
         }
-        string Password = InputPassword();
+        string Password = PasswordHide.PasswordUsers();
         string Name = InputName();
         string Surname = InputSurname();
         string Number = InputNumber();
