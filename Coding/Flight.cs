@@ -1,16 +1,16 @@
 class Flight
 {
-    private string Price;
+    private double Price;
     private string Country;
-    private string Time;
+    private double Time;
 
-    public Flight(string Price,string Country,string Time)
+    public Flight(double Price,string Country,double Time)
     {
         this.Price = Price;
         this.Country = Country;
         this.Time = Time;
     }
-    public string GetPrice()
+    public double GetPrice()
     {
         return this.Price;
     }
@@ -18,7 +18,7 @@ class Flight
     {
         return this.Country;
     }
-    public string GetTime()
+    public double GetTime()
     {
         return this.Time;
     }
