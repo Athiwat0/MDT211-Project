@@ -21,26 +21,16 @@ class PersonList
         }
         return false;
     }
-
-    public void FetchCollegianPersonList()
+    public bool CheckIDPassword(string ID,string Password)
     {
         foreach(Person person in this.personlist)
         {
-            if (person is Admin)
+            if (person.GetID()==ID&&person.GetPassword()==Password)
             {
-                Console.WriteLine("Name {0} {1}  {2}",person.GetNumber(),person.GetName(),person.GetSurname());
+                return false;
             }
         }
-    }
-    public void FetchStudentPersonList()
-    {
-        foreach(Person person in this.personlist)
-        {
-            if (person is User)
-            {
-                Console.WriteLine("Name {0} {1}  {2}",person.GetNumber(),person.GetName(),person.GetSurname());
-            }
-        }
+        return true;
     }
 
 }

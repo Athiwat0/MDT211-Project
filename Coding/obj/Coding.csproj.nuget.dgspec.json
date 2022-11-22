@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\KmuttWork\\MDT-Coding\\MDT211-Project\\Coding\\Coding.csproj": {}
+    "C:\\Users\\User\\Desktop\\Final2\\mdt211-project\\coding\\Coding.csproj": {}
   },
   "projects": {
-    "D:\\KmuttWork\\MDT-Coding\\MDT211-Project\\Coding\\Coding.csproj": {
+    "C:\\Users\\User\\Desktop\\Final2\\mdt211-project\\coding\\Coding.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\KmuttWork\\MDT-Coding\\MDT211-Project\\Coding\\Coding.csproj",
+        "projectUniqueName": "C:\\Users\\User\\Desktop\\Final2\\mdt211-project\\coding\\Coding.csproj",
         "projectName": "Coding",
-        "projectPath": "D:\\KmuttWork\\MDT-Coding\\MDT211-Project\\Coding\\Coding.csproj",
-        "packagesPath": "C:\\Users\\GF76\\.nuget\\packages\\",
-        "outputPath": "D:\\KmuttWork\\MDT-Coding\\MDT211-Project\\Coding\\obj\\",
+        "projectPath": "C:\\Users\\User\\Desktop\\Final2\\mdt211-project\\coding\\Coding.csproj",
+        "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\User\\Desktop\\Final2\\mdt211-project\\coding\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\GF76\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"

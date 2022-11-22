@@ -63,8 +63,20 @@
         }
         else if (admin == "N")
         {
+            Console.WriteLine("Input ID and Password or Input 'Exit' for back");
             string id = InputID();
-            string Password = InputPassword();
+            if(id == "Exit")
+            {
+                PrintMenu();
+            }
+            string password = InputPassword();
+            if(personlist.CheckIDPassword(id,password))
+            {
+                Console.WriteLine("Not found ID and Password");
+                Console.WriteLine("Input ID and Password again");
+                Console.ReadLine();
+                ShowLogin();
+            }
             ShowInsideLoginForUser();
         }
         Console.WriteLine("===============================");
