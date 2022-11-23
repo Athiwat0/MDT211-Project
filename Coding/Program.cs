@@ -17,10 +17,11 @@
     public static void PrintListMenuLogout()
     {
         Console.Clear();
-        Console.WriteLine("----- Menu idea camp 2022 -----");
+        Console.WriteLine("    Welcome to air ticket booking program   ");
+        Console.WriteLine("------------------  Menu  -------------------");
         Console.WriteLine("1.Login");
         Console.WriteLine("2.Register");
-        Console.WriteLine("-------------------------------");
+        Console.WriteLine("---------------------------------------------");
 
     }
     public static void PresentMenuLogout()
@@ -47,17 +48,28 @@
         string[] IDAdmin = new string[] {"Pan","Mick","Deil"};
         string[] PassAdmin = new string[] {"1008","1061","1066"};
         Console.WriteLine("Are you admin?(Y/N)");
+        Console.Write(" : ");
         string admin = Console.ReadLine();
         if(admin == "Y")
         {
-            Console.WriteLine("Input Admin ID or 'exit' for exit");
+            Console.Write("Input Admin ID : ");
             string AdminID = Console.ReadLine();
-            if(AdminID == "exit")
+            if(AdminID == "Pan" || AdminID == "Mick" || AdminID == "Deil");           
+            else
             {
-                PrintMenu();
+                Console.Clear();
+                ShowLogin();
             }
-            Console.WriteLine("Admin Password");
-            string PasswordAdmin = Console.ReadLine(); //ทำซ่อน Password
+            Console.Write("Input the Admin Password : ");
+            string PasswordAdmin = null;
+            while (true)
+            {
+                var key = System.Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter)
+                break;
+                PasswordAdmin += key.KeyChar;
+                }
+
             if(AdminID == IDAdmin[0] && PasswordAdmin == PassAdmin[0])
             {
                 ShowInsideLoginForAdmin();
@@ -88,7 +100,10 @@
     public static void ShowLoginUser()
     {
         Console.Clear();
-        Console.WriteLine("Use 1.GuestID or 2.YourID or 3.exit");
+        Console.WriteLine("1.GuestID");
+        Console.WriteLine("2.YourID");
+        Console.WriteLine("3.Exit");
+        Console.Write("Please Input : ");
         string Guest = Console.ReadLine();
         if(Guest == "1" || Guest == "GuestID")
         {
@@ -96,13 +111,22 @@
         }
         else if (Guest == "2"||Guest == "YourID")
         {
-            Console.WriteLine("Input ID and Password or Input 'exit' for back");
+            Console.WriteLine("Input ID ( 'exit' for back )");
+            Console.Write(" : ");
             string id = InputID();
             if(id == "exit")
             {
                 PrintMenu();
             }
-            string password = InputPassword(); //ทำซ่อน Password
+            Console.Write("Input your Password : ");
+            string password = null;
+            while (true)
+            {
+                var key = System.Console.ReadKey(true);
+                if (key.Key == ConsoleKey.Enter)
+                break;
+                password += key.KeyChar;
+            }
             if(personlist.CheckIDPassword(id,password))
             {
                 Console.WriteLine("Not found ID and Password");
@@ -224,7 +248,7 @@
     }
     public static void FilterFlight()
     {
-        Console.WriteLine("What do you want to go?"); // แก้คำใหม่ด้วย
+        Console.WriteLine("Which country do you want to travel to?");
         string country = InputCountry();
         if(flightlist.CheckMem(country))
         {
