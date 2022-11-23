@@ -41,7 +41,6 @@
         PrintMenu();
 
     }
-
     public static void ShowLogin()
     {
         string admin1 = "1061";
@@ -63,6 +62,23 @@
         }
         else if (admin == "N")
         {
+            ShowLoginUser();
+        }
+        Console.WriteLine("===============================");
+        Console.Write("Please try again.");
+        Console.ReadLine();
+        ShowLogin();
+    }
+    public static void ShowLoginUser()
+    {
+        Console.WriteLine("Use 1.GuestID or 2.YourID");
+        string Guest = Console.ReadLine();
+        if(Guest == "1" || Guest == "GuestID")
+        {
+            ShowInsideLoginForGuest();
+        }
+        else if (Guest == "2"||Guest == "YourID")
+        {
             Console.WriteLine("Input ID and Password or Input 'Exit' for back");
             string id = InputID();
             if(id == "Exit")
@@ -75,24 +91,74 @@
                 Console.WriteLine("Not found ID and Password");
                 Console.WriteLine("Input ID and Password again");
                 Console.ReadLine();
-                ShowLogin();
+                ShowLoginUser();
             }
             ShowInsideLoginForUser();
         }
-        Console.WriteLine("===============================");
-        Console.Write("Please try again.");
+        Console.WriteLine("Write '1' or '2'");
         Console.ReadLine();
-        ShowLogin();
+        ShowLoginUser();
     }
     public static void ShowInsideLoginForAdmin()
     {
-        double price = InputPrice();
-        string country = InputCountry();
-        double time = InputTime();
-        Flight flight = new Flight(price,country,time);
+        Console.Clear();
+        Console.WriteLine("---Menu Admin---");
+        Console.WriteLine("1.Add flight");
+        Console.WriteLine("2.Logout");
+        Console.WriteLine("----------------");
+        string select = Console.ReadLine();
+        if(select=="1")
+        {
+            Console.Clear();
+            Console.WriteLine("---Add flight---");
+            double price = InputPrice();
+            string country = InputCountry();
+            double time = InputTime();
+            Flight flight = new Flight(price,country,time);
 
-        Program.flightlist.AddNewFlight(flight);
+            Program.flightlist.AddNewFlight(flight);
+            Console.WriteLine("Back to menu admin");
+            Console.ReadLine();
+            ShowInsideLoginForAdmin();
+        }
+        else if(select == "2")
+        {
+            PrintMenu();
+        }
+        Console.WriteLine("Write only '1' or '2'");
+        Console.ReadLine();
+        ShowInsideLoginForAdmin();
 
+    }
+    public static void ShowInsideLoginForGuest()
+    {
+        Console.Clear();
+        Console.WriteLine("1.Additional Flight ");
+        Console.WriteLine("2.Filter Flight");
+        Console.WriteLine("3.Logout");
+        SelectMenuGuest();
+        ShowInsideLoginForUser();
+    }
+    public static void SelectMenuGuest()
+    {
+        Console.Write("Please select choice : ");
+        int choice = (int.Parse(Console.ReadLine()));
+        switch(choice)
+        {
+            case 1:
+                Program.flightlist.AdditionalFlight();
+                ShowInsideLoginForGuest();
+                break;
+            case 2:
+                FilterFlight();
+                ShowInsideLoginForGuest();
+                break;
+            case 3:
+                PrintMenu();
+                break;
+            default:
+                break;
+        }
     }
     public static void ShowInsideLoginForUser()
     {
@@ -126,9 +192,11 @@
                 break;
             case 4:
                 FilterFlight();
+                ShowInsideLoginForUser();
                 break;
             case 5:
                 SearchSelectFlight();
+                ShowInsideLoginForUser();
                 break;
             case 6:
                 PrintMenu();
@@ -143,14 +211,13 @@
         if(flightlist.CheckMem(country))
         {
             Console.WriteLine("Nothing ");
-            Console.ReadLine();
-            ShowInsideLoginForUser();
         }
-        Program.flightlist.FindFlightCountry(country);
-        Console.WriteLine("Other flight not match");
-        
+        else
+        {
+            Program.flightlist.FindFlightCountry(country);
+            Console.WriteLine("Other flight not match");
+        }
         Console.ReadLine();
-        ShowInsideLoginForUser();
     }
     public static void SearchSelectFlight()
     {
@@ -162,11 +229,9 @@
         {
             Console.WriteLine("price {0} country {1} time {2}",price*2,country,time);
             Console.ReadLine();
-            ShowInsideLoginForUser();
         }
         Console.WriteLine("Not found");
         Console.ReadLine();
-        ShowInsideLoginForUser();
     }
 
     public static void InputRegisterUser()
@@ -174,7 +239,6 @@
         Console.Clear();
         PrintMenuRegister();
         PresentMenuRegister();
-
     }
     
     public static void PrintMenuRegister()
@@ -202,12 +266,36 @@
     {
         Console.Clear();
         Console.WriteLine("Register User");
+        Console.WriteLine("How many doses of vaccine have you received?");
+        int vaccine = int.Parse(Console.ReadLine());
+        if(vaccine < 3)
+        {
+            Console.WriteLine("You can't register but you will have Guest ID to see something");
+            Console.WriteLine("will you take it?(Y/N)");
+            Console.WriteLine("If you write something else, it will go back to the previous page.");
+            string takeGuest = Console.ReadLine();
+            if(takeGuest == "Y")
+            {
+                ShowInsideLoginForGuest();
+            }
+            else if(takeGuest == "N")
+            {
+                PrintMenu();
+            }
+            ShowInputUser();
+        }
+        InputInfo();
+    }
+    public static void InputInfo()
+    {
+        Console.Clear();
+        Console.WriteLine("Register User");
         string ID = InputID();
         if(personlist.findID(ID))
         {
             Console.WriteLine("Input ID Again");
             Console.ReadLine();
-            ShowInputUser();
+            InputInfo();
             return;
         }
         string Password = PasswordHide.PasswordUsers();
