@@ -27,37 +27,52 @@
     {
         Console.Write("Please select menu : ");
         int menuLogout = (int.Parse(Console.ReadLine()));
+        Console.Clear();
         switch (menuLogout)
         {
             case 1:
                 ShowLogin();
+                Console.Clear();
                 break;
             case 2:
-                InputRegisterUser();
+                ShowInputUser();
                 break;
             default:
                 break;
         }
         PrintMenu();
-
     }
     public static void ShowLogin()
     {
-        string admin1 = "1061";
-        string admin2 = "1008";
-        Console.Clear();
+        string[] IDAdmin = new string[] {"Pan","Mick","Deil"};
+        string[] PassAdmin = new string[] {"1008","1061","1066"};
         Console.WriteLine("Are you admin?(Y/N)");
         string admin = Console.ReadLine();
         if(admin == "Y")
         {
-            Console.WriteLine("Secret password");
-            string PasswordAdmin = Console.ReadLine();
-            if(PasswordAdmin == admin1 || PasswordAdmin == admin2)
+            Console.WriteLine("Input Admin ID or 'exit' for exit");
+            string AdminID = Console.ReadLine();
+            if(AdminID == "exit")
+            {
+                PrintMenu();
+            }
+            Console.WriteLine("Admin Password");
+            string PasswordAdmin = Console.ReadLine(); //ทำซ่อน Password
+            if(AdminID == IDAdmin[0] && PasswordAdmin == PassAdmin[0])
+            {
+                ShowInsideLoginForAdmin();
+            }
+            else if(AdminID == IDAdmin[1] && PasswordAdmin == PassAdmin[1])
+            {
+                ShowInsideLoginForAdmin();
+            }
+            else if(AdminID == IDAdmin[2] && PasswordAdmin == PassAdmin[2])
             {
                 ShowInsideLoginForAdmin();
             }
             Console.WriteLine("You aren't admin.Please Input ID and Password again");
             Console.ReadLine();
+            Console.Clear();
             ShowLogin();
         }
         else if (admin == "N")
@@ -67,11 +82,13 @@
         Console.WriteLine("===============================");
         Console.Write("Please try again.");
         Console.ReadLine();
+        Console.Clear();
         ShowLogin();
     }
     public static void ShowLoginUser()
     {
-        Console.WriteLine("Use 1.GuestID or 2.YourID");
+        Console.Clear();
+        Console.WriteLine("Use 1.GuestID or 2.YourID or 3.exit");
         string Guest = Console.ReadLine();
         if(Guest == "1" || Guest == "GuestID")
         {
@@ -79,13 +96,13 @@
         }
         else if (Guest == "2"||Guest == "YourID")
         {
-            Console.WriteLine("Input ID and Password or Input 'Exit' for back");
+            Console.WriteLine("Input ID and Password or Input 'exit' for back");
             string id = InputID();
-            if(id == "Exit")
+            if(id == "exit")
             {
                 PrintMenu();
             }
-            string password = InputPassword();
+            string password = InputPassword(); //ทำซ่อน Password
             if(personlist.CheckIDPassword(id,password))
             {
                 Console.WriteLine("Not found ID and Password");
@@ -95,7 +112,11 @@
             }
             ShowInsideLoginForUser();
         }
-        Console.WriteLine("Write '1' or '2'");
+        else if(Guest == "3" || Guest == "exit")
+        {
+            PrintMenu();
+        }
+        Console.WriteLine("Write '1' or '2' or '3'");
         Console.ReadLine();
         ShowLoginUser();
     }
@@ -113,8 +134,9 @@
             Console.WriteLine("---Add flight---");
             double price = InputPrice();
             string country = InputCountry();
-            double time = InputTime();
-            Flight flight = new Flight(price,country,time);
+            double timeOut = InputTimeOut();
+            double timeIn = InputTimeIn();
+            Flight flight = new Flight(country,timeOut,timeIn,price);
 
             Program.flightlist.AddNewFlight(flight);
             Console.WriteLine("Back to menu admin");
@@ -163,12 +185,11 @@
     public static void ShowInsideLoginForUser()
     {
         Console.Clear();
-        Console.WriteLine("1.Flight 1 ");
-        Console.WriteLine("2.Flight 2 ");
+        Console.WriteLine("1.Price 50 Country A Time 50"); //เปลี่ยนเป็นประเทส เวลา ราคา
+        Console.WriteLine("2.Flight 2 "); //เปลี่ยนเป็นประเทส เวลา ราคา
         Console.WriteLine("3.Additional Flight ");
-        Console.WriteLine("4.Filter Flight");
-        Console.WriteLine("5.Search or Select Flight");
-        Console.WriteLine("6.Logout");
+        Console.WriteLine("4.Select Flight");
+        Console.WriteLine("5.Logout");
         SelectMenuUser();
         ShowInsideLoginForUser();
     }
@@ -179,11 +200,11 @@
         switch(choice)
         {
             case 1:
-                Console.WriteLine("Flight 1");
+                Console.WriteLine("Flight 1");//ประกาศและส่งตัวแปรไปยังเมธอดเชคบิล
                 Console.ReadLine();
                 break;
             case 2:
-                Console.WriteLine("Flight 2");
+                Console.WriteLine("Flight 2");//ประกาศและส่งตัวแปรไปยังเมธอดเชคบิล
                 Console.ReadLine();
                 break;
             case 3:
@@ -191,14 +212,10 @@
                 ShowInsideLoginForUser();
                 break;
             case 4:
-                FilterFlight();
-                ShowInsideLoginForUser();
-                break;
-            case 5:
                 SearchSelectFlight();
                 ShowInsideLoginForUser();
                 break;
-            case 6:
+            case 5:
                 PrintMenu();
                 break;
             default:
@@ -207,6 +224,7 @@
     }
     public static void FilterFlight()
     {
+        Console.WriteLine("What do you want to go?"); // แก้คำใหม่ด้วย
         string country = InputCountry();
         if(flightlist.CheckMem(country))
         {
@@ -221,51 +239,31 @@
     }
     public static void SearchSelectFlight()
     {
-        double price = InputPrice();
+        FilterFlight();
         string country = InputCountry();
-        double time = InputTime();
-
-        if(flightlist.SelectFlight(price,country,time))
+        double timeOut = InputTimeOut();
+        double timeIn = InputTimeIn();
+        double price = InputPrice();
+                                                                
+        if(flightlist.SelectFlight(country,timeOut,timeIn,price))//แก้ในวงเล็บปีกกาเอา country timeOut timeIn price ส่งไปยังเมธอดเช็คบิล(สร้างเมธอดใหม่เขึ้นมา)ที่เชื่อมกับคลาสCalculator
         {
-            Console.WriteLine("price {0} country {1} time {2}",price*2,country,time);
+            Console.WriteLine("country {0} time {1} - {2} price {3} ",country,timeOut,timeIn,price);//โดยเมธอดเชคบิลจะถามจำนวนเด็กและผู้ใหบ๋ด้วย baby ราคา 10% ของผู้ใหญ่ child ราคา 75% ของผู้ใหญ่ ผู้ใหญ่ 100%
             Console.ReadLine();
         }
         Console.WriteLine("Not found");
         Console.ReadLine();
     }
-
-    public static void InputRegisterUser()
-    {
-        Console.Clear();
-        PrintMenuRegister();
-        PresentMenuRegister();
-    }
     
-    public static void PrintMenuRegister()
-    {
-        Console.WriteLine("1.User");
-        Console.WriteLine("2.Admin");
-    }
-    public static void PresentMenuRegister()
-    {
-        Console.Write("Please select group : ");
-        int menuregis = (int.Parse(Console.ReadLine()));
-        switch(menuregis)
-        {
-            case 1:
-                ShowInputUser();
-                break;
-            case 2:
-                ShowInputAdmin();
-                break;
-            default:
-                break;
-        }
-    }
     public static void ShowInputUser()
     {
         Console.Clear();
-        Console.WriteLine("Register User");
+        Console.WriteLine("Question for Register");
+        Console.WriteLine("Write 'exit' for exit or any button to answer the question");
+        string exit = Console.ReadLine();
+        if(exit == "exit")
+        {
+            PrintMenu();
+        }
         Console.WriteLine("How many doses of vaccine have you received?");
         int vaccine = int.Parse(Console.ReadLine());
         if(vaccine < 3)
@@ -290,6 +288,12 @@
     {
         Console.Clear();
         Console.WriteLine("Register User");
+        Console.WriteLine("Write 'exit' for exit or any button to continue");
+        string exit = Console.ReadLine();
+        if(exit == "exit")
+        {
+            PrintMenu();
+        }
         string ID = InputID();
         if(personlist.findID(ID))
         {
@@ -303,33 +307,11 @@
         string Surname = InputSurname();
         string Number = InputNumber();
 
-        Admin admin = new Admin(ID,Password,Name,Surname,Number);
-
-        Program.personlist.AddNewPerson(admin);
-    }
-
-    public static void ShowInputAdmin()
-    {
-        Console.Clear();
-        Console.WriteLine("Register Admin");
-        string ID = InputID();
-        if(personlist.findID(ID))
-        {
-            Console.WriteLine("Input ID Again");
-            Console.ReadLine();
-            ShowInputAdmin();
-            return;
-        }
-        string Password = PasswordHide.PasswordUsers();
-        string Name = InputName();
-        string Surname = InputSurname();
-        string Number = InputNumber();
-
         User user = new User(ID,Password,Name,Surname,Number);
-        
 
         Program.personlist.AddNewPerson(user);
     }
+
 
     public static void PreparePersonListWhenProgramIsLoad()
     {
@@ -371,9 +353,14 @@
         Console.Write("Country : ");
         return Console.ReadLine();
     }
-    public static double InputTime()
+    public static double InputTimeIn()
     {
-        Console.Write("Time : ");
+        Console.Write("Time In : ");
+        return double.Parse(Console.ReadLine());
+    }
+    public static double InputTimeOut()
+    {
+        Console.Write("Time Out : ");
         return double.Parse(Console.ReadLine());
     }
     public static void PrepareFlightListWhenProgramIsLoad()
