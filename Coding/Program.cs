@@ -18,11 +18,10 @@
     {
         Console.Clear();
         Console.WriteLine("    Welcome to air ticket booking program   ");
-        Console.WriteLine("------------------  Menu  -------------------");
+        Console.WriteLine("==============  Menu Information  ==============");
         Console.WriteLine("1.Login");
         Console.WriteLine("2.Register");
-        Console.WriteLine("---------------------------------------------");
-
+        Console.WriteLine("================================================");
     }
     public static void PresentMenuLogout()
     {
@@ -52,12 +51,12 @@
         string admin = Console.ReadLine();
         if(admin == "Y")
         {
+            Console.Clear();
             Console.Write("Input Admin ID : ");
             string AdminID = Console.ReadLine();
             if(AdminID == "Pan" || AdminID == "Mick" || AdminID == "Deil");           
             else
             {
-                Console.Clear();
                 ShowLogin();
             }
             Console.Write("Input the Admin Password : ");
@@ -82,6 +81,8 @@
             {
                 ShowInsideLoginForAdmin();
             }
+            Console.WriteLine("");
+            Console.WriteLine("======================================================");
             Console.WriteLine("You aren't admin.Please Input ID and Password again");
             Console.ReadLine();
             Console.Clear();
@@ -100,9 +101,11 @@
     public static void ShowLoginUser()
     {
         Console.Clear();
+        Console.WriteLine("==============  Menu Information  ==============");
         Console.WriteLine("1.GuestID");
         Console.WriteLine("2.YourID");
         Console.WriteLine("3.Exit");
+        Console.WriteLine("================================================");
         Console.Write("Please Input : ");
         string Guest = Console.ReadLine();
         if(Guest == "1" || Guest == "GuestID")
@@ -112,7 +115,6 @@
         else if (Guest == "2"||Guest == "YourID")
         {
             Console.WriteLine("Input ID ( 'exit' for back )");
-            Console.Write(" : ");
             string id = InputID();
             if(id == "exit")
             {
@@ -129,6 +131,8 @@
             }
             if(personlist.CheckIDPassword(id,password))
             {
+                Console.WriteLine("");
+                Console.WriteLine("==============================");
                 Console.WriteLine("Not found ID and Password");
                 Console.WriteLine("Input ID and Password again");
                 Console.ReadLine();
@@ -140,22 +144,22 @@
         {
             PrintMenu();
         }
-        Console.WriteLine("Write '1' or '2' or '3'");
+        Console.WriteLine("Please select ( 1 or 2 or 3 )");
         Console.ReadLine();
         ShowLoginUser();
     }
     public static void ShowInsideLoginForAdmin()
     {
         Console.Clear();
-        Console.WriteLine("---Menu Admin---");
+        Console.WriteLine("=====  Menu Admin  =====");
         Console.WriteLine("1.Add flight");
         Console.WriteLine("2.Logout");
-        Console.WriteLine("----------------");
+        Console.WriteLine("========================");
         string select = Console.ReadLine();
         if(select=="1")
         {
             Console.Clear();
-            Console.WriteLine("---Add flight---");
+            Console.WriteLine("====  Add flight  ====");
             double price = InputPrice();
             string country = InputCountry();
             double timeOut = InputTimeOut();
@@ -163,7 +167,8 @@
             Flight flight = new Flight(country,timeOut,timeIn,price);
 
             Program.flightlist.AddNewFlight(flight);
-            Console.WriteLine("Back to menu admin");
+            Console.WriteLine("===============================");
+            Console.WriteLine("Enter to Back to menu admin");
             Console.ReadLine();
             ShowInsideLoginForAdmin();
         }
@@ -171,7 +176,8 @@
         {
             PrintMenu();
         }
-        Console.WriteLine("Write only '1' or '2'");
+        Console.WriteLine("===============================");
+        Console.Write("Please select ( 1 or 2 )");
         Console.ReadLine();
         ShowInsideLoginForAdmin();
 
@@ -187,6 +193,7 @@
     }
     public static void SelectMenuGuest()
     {
+        Console.WriteLine("===============================");
         Console.Write("Please select choice : ");
         int choice = (int.Parse(Console.ReadLine()));
         switch(choice)
@@ -209,8 +216,8 @@
     public static void ShowInsideLoginForUser()
     {
         Console.Clear();
-        Console.WriteLine("1.Price 50 Country A Time 50"); //เปลี่ยนเป็นประเทส เวลา ราคา
-        Console.WriteLine("2.Flight 2 "); //เปลี่ยนเป็นประเทส เวลา ราคา
+        Console.WriteLine("1.Country : Thailand to United States of America || TimeOut : 08:30 || Price : xxxxx");
+        Console.WriteLine("2.Country : Thailand to Australia || TimeOut : 10:30 || Price : xxxxx");
         Console.WriteLine("3.Additional Flight ");
         Console.WriteLine("4.Select Flight");
         Console.WriteLine("5.Logout");
@@ -219,6 +226,7 @@
     }
     public static void SelectMenuUser()
     {
+        Console.WriteLine("===============================");
         Console.Write("Please select choice : ");
         int choice = (int.Parse(Console.ReadLine()));
         switch(choice)
@@ -281,20 +289,24 @@
     public static void ShowInputUser()
     {
         Console.Clear();
-        Console.WriteLine("Question for Register");
-        Console.WriteLine("Write 'exit' for exit or any button to answer the question");
+        Console.WriteLine("              Question for Register                ");
+        Console.WriteLine("===================================================");
+        Console.WriteLine("Enter to answer questions or exit ( Write 'exit' ) ");
+        Console.Write(" : ");
         string exit = Console.ReadLine();
         if(exit == "exit")
         {
             PrintMenu();
         }
+        Console.Clear();
         Console.WriteLine("How many doses of vaccine have you received?");
+        Console.Write(" : ");
         int vaccine = int.Parse(Console.ReadLine());
         if(vaccine < 3)
         {
-            Console.WriteLine("You can't register but you will have Guest ID to see something");
-            Console.WriteLine("will you take it?(Y/N)");
+            Console.WriteLine("You can't register but you will have a Guest ID to see something");
             Console.WriteLine("If you write something else, it will go back to the previous page.");
+            Console.WriteLine("will you take it?(Y/N)");
             string takeGuest = Console.ReadLine();
             if(takeGuest == "Y")
             {
@@ -311,13 +323,16 @@
     public static void InputInfo()
     {
         Console.Clear();
-        Console.WriteLine("Register User");
-        Console.WriteLine("Write 'exit' for exit or any button to continue");
+        Console.WriteLine("===========  Register User  =============");
+        Console.WriteLine("Enter to continue or exit ( Write 'exit' )");
         string exit = Console.ReadLine();
         if(exit == "exit")
         {
             PrintMenu();
         }
+        Console.Clear();
+        Console.WriteLine("Please enter this information.");
+        Console.WriteLine("==============================");
         string ID = InputID();
         if(personlist.findID(ID))
         {

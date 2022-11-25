@@ -24,13 +24,14 @@ class PasswordHide{
 
         if(MatchByteArray(ref passwordHash, ref confirmedPasswordHash))
         {
+            Console.WriteLine("==========================");
             Console.WriteLine("Your password matches.");
-            Console.WriteLine("===================================================================");
+            Console.WriteLine("==========================");
             return password;
         }
         else
         {
-            Console.WriteLine("===================================================================");
+            Console.WriteLine("======================================");
             Console.WriteLine("Your passwords do not match.");
             Console.WriteLine("Please try again. (Enter for next)");
             Console.ReadKey();
