@@ -2,11 +2,13 @@
 {
     public static PersonList personlist;
     public static FlightList flightlist;
+    public static HistoryList historylist;
 
     public static void Main(string[] args)
     {
         PrepareFlightListWhenProgramIsLoad();
         PreparePersonListWhenProgramIsLoad();
+        PrepareHistoryListWhenProgramIsLoad();
         PrintMenu();
     }
     public static void PrintMenu()
@@ -220,7 +222,8 @@
         Console.WriteLine("2.Country : Thailand to Australia || TimeOut : 10:30 || Price : xxxxx");
         Console.WriteLine("3.Additional Flight ");
         Console.WriteLine("4.Select Flight");
-        Console.WriteLine("5.Logout");
+        Console.WriteLine("5.History");
+        Console.WriteLine("6.Logout");
         SelectMenuUser();
         ShowInsideLoginForUser();
     }
@@ -229,14 +232,17 @@
         Console.WriteLine("===============================");
         Console.Write("Please select choice : ");
         int choice = (int.Parse(Console.ReadLine()));
+        string country ; double timeOut ; double timeIn ; double price ;
         switch(choice)
         {
             case 1:
-                Console.WriteLine("Flight 1");//ประกาศและส่งตัวแปรไปยังเมธอดเชคบิล
+                country = "United States of America"; timeOut = 08.30; timeIn = 10.30; price = 100;
+                checkbill(country,timeOut,timeIn,price);
                 Console.ReadLine();
                 break;
             case 2:
-                Console.WriteLine("Flight 2");//ประกาศและส่งตัวแปรไปยังเมธอดเชคบิล
+                country = "Australia"; timeOut = 10.30; timeIn = 12.30; price = 100;
+                checkbill(country,timeOut,timeIn,price);
                 Console.ReadLine();
                 break;
             case 3:
@@ -248,6 +254,10 @@
                 ShowInsideLoginForUser();
                 break;
             case 5:
+                Program.historylist.showhistory();
+                ShowInsideLoginForUser();
+                break;
+            case 6:
                 PrintMenu();
                 break;
             default:
@@ -279,13 +289,27 @@
                                                                 
         if(flightlist.SelectFlight(country,timeOut,timeIn,price))//แก้ในวงเล็บปีกกาเอา country timeOut timeIn price ส่งไปยังเมธอดเช็คบิล(สร้างเมธอดใหม่เขึ้นมา)ที่เชื่อมกับคลาสCalculator
         {
-            Console.WriteLine("country {0} time {1} - {2} price {3} ",country,timeOut,timeIn,price);//โดยเมธอดเชคบิลจะถามจำนวนเด็กและผู้ใหบ๋ด้วย baby ราคา 10% ของผู้ใหญ่ child ราคา 75% ของผู้ใหญ่ ผู้ใหญ่ 100%
+            checkbill(country,timeOut,timeIn,price);
             Console.ReadLine();
+            ShowInsideLoginForUser();
         }
         Console.WriteLine("Not found");
         Console.ReadLine();
     }
-    
+    public static void checkbill(string country,double timeOut,double timeIn,double price)
+    {
+        Console.WriteLine("Adult");
+        double Adult = double.Parse(Console.ReadLine());
+        Console.WriteLine("Child");
+        double Child = double.Parse(Console.ReadLine());
+        Console.WriteLine("Baby");
+        double Baby = double.Parse(Console.ReadLine());
+        double calculateF = CalMoney.CalM(Adult,Child,Baby,price);
+        Console.WriteLine(calculateF);
+        History history = new History(country,timeOut,timeIn,calculateF,Adult,Child,Baby);
+        Program.historylist.AddNewHistory(history);
+
+    }
     public static void ShowInputUser()
     {
         Console.Clear();
@@ -346,9 +370,9 @@
         string Surname = InputSurname();
         string Number = InputNumber();
 
-        User user = new User(ID,Password,Name,Surname,Number);
+        Person person = new Person(ID,Password,Name,Surname,Number);
 
-        Program.personlist.AddNewPerson(user);
+        Program.personlist.AddNewPerson(person);
     }
 
 
@@ -405,5 +429,9 @@
     public static void PrepareFlightListWhenProgramIsLoad()
     {
         Program.flightlist = new FlightList();
+    }
+    public static void PrepareHistoryListWhenProgramIsLoad()
+    {
+        Program.historylist = new HistoryList();
     }
 }

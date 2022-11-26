@@ -15,7 +15,7 @@ class FlightList
         Console.WriteLine("----- List Flight -----");
         foreach(Flight flight in this.flightlist)
         {
-            Console.WriteLine("Country {0} Time Out{1}-Time In{2} Price {3}",flight.GetCountry(),flight.GetTimeOut(),flight.GetTimeIn(),flight.GetPrice());
+            Console.WriteLine("Country {0} Time {1:f2} - {2:f2} Price {3:f2}",flight.GetCountry(),flight.GetTimeOut(),flight.GetTimeIn(),flight.GetPrice());
         }
         Console.WriteLine("----- List Flight -----");
         Console.ReadLine();
@@ -26,7 +26,7 @@ class FlightList
         {
             if (flight.GetCountry()==country)
             {
-                Console.WriteLine("Country {0} Time Out{1}-Time In{2} Price {3}",flight.GetCountry(),flight.GetTimeOut(),flight.GetTimeIn(),flight.GetPrice());
+                Console.WriteLine("Country {0} Time {1:f2} - {2:f2} Price {3:f2}",flight.GetCountry(),flight.GetTimeOut(),flight.GetTimeIn(),flight.GetPrice());
             }
         }
     }
@@ -45,7 +45,7 @@ class FlightList
     {
         foreach(Flight flight in this.flightlist)
         {
-            if(flight.GetCountry()==country&&flight.GetTimeOut()==timeOut&&flight.GetTimeOut()==timeIn&&flight.GetPrice()==price)
+            if(flight.GetCountry()==country&&flight.GetTimeOut()==timeOut&&flight.GetTimeIn()==timeIn&&flight.GetPrice()==price)
             {
                 return true;
             }
