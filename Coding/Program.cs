@@ -23,6 +23,7 @@
         Console.WriteLine("==============  Menu Information  ==============");
         Console.WriteLine("1.Login");
         Console.WriteLine("2.Register");
+        Console.WriteLine("3.Exit");
         Console.WriteLine("================================================");
     }
     public static void PresentMenuLogout()
@@ -38,11 +39,16 @@
                 break;
             case 2:
                 ShowInputUser();
+                PrintMenu();
+                break;
+            case 3:
+                Environment.Exit(0);//โคดจบโปรแกรม
                 break;
             default:
+                Console.WriteLine("Input 1 2 3");
+                PrintMenu();
                 break;
         }
-        PrintMenu();
     }
     public static void ShowLogin()
     {
