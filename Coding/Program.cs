@@ -61,15 +61,8 @@
             {
                 ShowLogin();
             }
-            Console.Write("Input the Admin Password : ");
-            string PasswordAdmin = null;
-            while (true)
-            {
-                var key = System.Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Enter)
-                break;
-                PasswordAdmin += key.KeyChar;
-                }
+            Console.Write("Input the Admin Password : "); 
+            string PasswordAdmin = PasswordHide.PasswordHideAdmin(); //PasswordHide for Admin
 
             if(AdminID == IDAdmin[0] && PasswordAdmin == PassAdmin[0])
             {
@@ -116,21 +109,16 @@
         }
         else if (Guest == "2"||Guest == "YourID")
         {
+            Console.WriteLine("================================================");
             Console.WriteLine("Input ID ( 'exit' for back )");
             string id = InputID();
             if(id == "exit")
             {
                 PrintMenu();
             }
-            Console.Write("Input your Password : ");
-            string password = null;
-            while (true)
-            {
-                var key = System.Console.ReadKey(true);
-                if (key.Key == ConsoleKey.Enter)
-                break;
-                password += key.KeyChar;
-            }
+            Console.Write("Input your Password : ");   
+            string password = PasswordHide.PasswordHideUsers(); //PasswordHide for Users
+
             if(personlist.CheckIDPassword(id,password))
             {
                 Console.WriteLine("");
@@ -218,8 +206,9 @@
     public static void ShowInsideLoginForUser()
     {
         Console.Clear();
-        Console.WriteLine("1.Country : Thailand to United States of America || TimeOut : 08:30 || Price : xxxxx");
-        Console.WriteLine("2.Country : Thailand to Australia || TimeOut : 10:30 || Price : xxxxx");
+        Console.WriteLine("==============  Menu Information  ==============");
+        Console.WriteLine("1.Country : Thailand to United States of America || TimeOut : 08:30 - 13:30 || Price : 54,000");
+        Console.WriteLine("2.Country : Thailand to Australia || TimeOut : 10:30 - 14:30 || Price : 48,000");
         Console.WriteLine("3.Additional Flight ");
         Console.WriteLine("4.Select Flight");
         Console.WriteLine("5.History");
@@ -229,19 +218,19 @@
     }
     public static void SelectMenuUser()
     {
-        Console.WriteLine("===============================");
+        Console.WriteLine("================================================");
         Console.Write("Please select choice : ");
         int choice = (int.Parse(Console.ReadLine()));
         string country ; double timeOut ; double timeIn ; double price ;
         switch(choice)
         {
             case 1:
-                country = "United States of America"; timeOut = 08.30; timeIn = 10.30; price = 100;
+                country = "United States of America"; timeOut = 08.30; timeIn = 13.30; price = 54000;
                 checkbill(country,timeOut,timeIn,price);
                 Console.ReadLine();
                 break;
             case 2:
-                country = "Australia"; timeOut = 10.30; timeIn = 12.30; price = 100;
+                country = "Australia"; timeOut = 10.30; timeIn = 14.30; price = 48000;
                 checkbill(country,timeOut,timeIn,price);
                 Console.ReadLine();
                 break;
@@ -355,6 +344,7 @@
             PrintMenu();
         }
         Console.Clear();
+        Console.WriteLine("==============================");
         Console.WriteLine("Please enter this information.");
         Console.WriteLine("==============================");
         string ID = InputID();

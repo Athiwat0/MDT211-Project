@@ -11,12 +11,13 @@ class PasswordHide{
         string password = GetHiddenConsoleInput();
         byte[] passwordByteArray = Encoding.ASCII.GetBytes(password);
 
-        SHA256 sha256 = SHA256.Create();
+        //SHA256 for PasswordHide to use in the program.cs
+        SHA256 sha256 = SHA256.Create(); 
         byte[] passwordHash = sha256.ComputeHash(passwordByteArray);
 
 
         //password confirme
-        Console.Write("Please input a password (input characters will be hidden): ");
+        Console.Write("Please input a password again for confirm (input characters will be hidden): ");
         string confirmedPassword = GetHiddenConsoleInput();
 
         byte[] confirmedPasswordByteArray = Encoding.ASCII.GetBytes(confirmedPassword);
@@ -38,6 +39,34 @@ class PasswordHide{
             BackToReturn();
             return null;
         }   
+    }
+
+    public static string PasswordHideUsers() //PasswordHide for Users to use in the program.cs
+    {
+        string password = null;
+        while (true)
+        {
+            var key = System.Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Enter)
+            break;
+            password += key.KeyChar;
+        }
+        return password;
+
+    }
+
+    public static string PasswordHideAdmin() //PasswordHide for Admin to use in the program.cs
+    {
+        string password = null;
+        while (true)
+        {
+            var key = System.Console.ReadKey(true);
+            if (key.Key == ConsoleKey.Enter)
+            break;
+            password += key.KeyChar;
+        }
+        return password;
+
     }
     
     static string GetHiddenConsoleInput()
