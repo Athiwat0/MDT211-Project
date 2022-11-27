@@ -157,7 +157,7 @@
         Console.WriteLine("1.Add flight");
         Console.WriteLine("2.Logout");
         Console.WriteLine("========================");
-        Console.WriteLine("Please Input : ");
+        Console.Write("Please Input : ");
         string select = Console.ReadLine();
         if(select=="1")
         {
@@ -309,6 +309,7 @@
         if(flightlist.CheckMem(country))
         {
             Console.WriteLine("There are no flights to this country.");
+            Console.WriteLine("Wait for admin to add flights to this country later.");
         }
         else
         {
@@ -320,8 +321,12 @@
     public static void SearchSelectFlight()
     {
         FilterFlight();
-        Console.WriteLine("Enter the flight information you want to go on.");
+        Console.WriteLine("Enter the flight information you want to go on('exit' on country for back to menu)");
         string country = InputCountry();
+        if(country == "exit")
+        {
+            ShowInsideLoginForUser();
+        }
         double timeOut = InputTimeOut();
         double timeIn = InputTimeIn();
         double price = InputPrice();
