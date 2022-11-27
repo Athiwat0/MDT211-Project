@@ -3,17 +3,17 @@ class History
     private string country;
     private double timeOut;
     private double timeIn;
-    private double calculateF;
+    private double totalprice;
     private double Adult;
     private double Child;
     private double Baby;
 
-    public History(string country,double timeOut,double timeIn,double calculateF,double Adult,double Child,double Baby)
+    public History(string country,double timeOut,double timeIn,double totalprice,double Adult,double Child,double Baby)
     {
         this.country = country;
         this.timeOut = timeOut;
         this.timeIn = timeIn;
-        this.calculateF = calculateF;
+        this.totalprice = totalprice;
         this.Adult = Adult;
         this.Child = Child;
         this.Baby = Baby;
@@ -30,9 +30,9 @@ class History
     {
         return this.timeIn;
     }
-    public double GetPrice()
+    public double GetTotalPrice()
     {
-        return this.calculateF;
+        return this.totalprice;
     }
     public double GetAdult()
     {

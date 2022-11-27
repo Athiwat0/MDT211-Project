@@ -12,23 +12,25 @@ class FlightList
     }
     public void AdditionalFlight()
     {
-        Console.WriteLine("----- List Flight -----");
+        Console.WriteLine("=========================================== List Flight ===========================================");
         foreach(Flight flight in this.flightlist)
         {
-            Console.WriteLine("Country {0} Time {1:f2} - {2:f2} Price {3:f2}",flight.GetCountry(),flight.GetTimeOut(),flight.GetTimeIn(),flight.GetPrice());
+            Console.WriteLine("Country {0} || Time {1:f2} - {2:f2} || Price {3:f2}",flight.GetCountry(),flight.GetTimeOut(),flight.GetTimeIn(),flight.GetPrice());
         }
-        Console.WriteLine("----- List Flight -----");
+        Console.WriteLine("===================================================================================================");
         Console.ReadLine();
     }
     public void FindFlightCountry(string country)
     {
+        Console.WriteLine("=========================================== List Flight ===========================================");
         foreach(Flight flight in this.flightlist)
         {
             if (flight.GetCountry()==country)
             {
-                Console.WriteLine("Country {0} Time {1:f2} - {2:f2} Price {3:f2}",flight.GetCountry(),flight.GetTimeOut(),flight.GetTimeIn(),flight.GetPrice());
+                Console.WriteLine("Country {0} || Time {1:f2} - {2:f2} || Price {3:f2}",flight.GetCountry(),flight.GetTimeOut(),flight.GetTimeIn(),flight.GetPrice());
             }
         }
+        Console.WriteLine("===================================================================================================");
     }
     public bool CheckMem(string country)
     {

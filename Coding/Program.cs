@@ -20,10 +20,10 @@
     {
         Console.Clear();
         Console.WriteLine("    Welcome to air ticket booking program   ");
-        Console.WriteLine("==============  Menu Information  ==============");
+        Console.WriteLine("=================  Main  Menu  =================");
         Console.WriteLine("1.Login");
         Console.WriteLine("2.Register");
-        Console.WriteLine("3.Exit");
+        Console.WriteLine("3.Exit Program");
         Console.WriteLine("================================================");
     }
     public static void PresentMenuLogout()
@@ -54,6 +54,7 @@
     {
         string[] IDAdmin = new string[] {"Pan","Mick","Deil"};
         string[] PassAdmin = new string[] {"1008","1061","1066"};
+
         Console.WriteLine("Are you admin?(Y/N)");
         Console.Write(" : ");
         string admin = Console.ReadLine();
@@ -65,6 +66,10 @@
             if(AdminID == "Pan" || AdminID == "Mick" || AdminID == "Deil");           
             else
             {
+                Console.WriteLine("======================================================");
+                Console.Write("You aren't admin.Please Input ID and Password again");
+                Console.ReadLine();
+                Console.Clear();
                 ShowLogin();
             }
             Console.Write("Input the Admin Password : "); 
@@ -105,7 +110,7 @@
         Console.WriteLine("==============  Menu Information  ==============");
         Console.WriteLine("1.GuestID");
         Console.WriteLine("2.YourID");
-        Console.WriteLine("3.Exit");
+        Console.WriteLine("3.Back To Main Menu");
         Console.WriteLine("================================================");
         Console.Write("Please Input : ");
         string Guest = Console.ReadLine();
@@ -116,7 +121,7 @@
         else if (Guest == "2"||Guest == "YourID")
         {
             Console.WriteLine("================================================");
-            Console.WriteLine("Input ID ( 'exit' for back )");
+            Console.WriteLine("Input ID ( 'exit' for back to main menu )");
             string id = InputID();
             if(id == "exit")
             {
@@ -212,19 +217,20 @@
     public static void ShowInsideLoginForUser()
     {
         Console.Clear();
-        Console.WriteLine("==============  Menu Information  ==============");
+        Console.WriteLine("=======================================  Menu Information  =======================================");
         Console.WriteLine("1.Country : Thailand to United States of America || TimeOut : 08:30 - 13:30 || Price : 54,000");
         Console.WriteLine("2.Country : Thailand to Australia || TimeOut : 10:30 - 14:30 || Price : 48,000");
         Console.WriteLine("3.Additional Flight ");
         Console.WriteLine("4.Select Flight");
         Console.WriteLine("5.History");
         Console.WriteLine("6.Logout");
+
         SelectMenuUser();
         ShowInsideLoginForUser();
     }
     public static void SelectMenuUser()
     {
-        Console.WriteLine("================================================");
+        Console.WriteLine("==================================================================================================");
         Console.Write("Please select choice : ");
         int choice = (int.Parse(Console.ReadLine()));
         string country ; double timeOut ; double timeIn ; double price ;
@@ -261,11 +267,14 @@
     }
     public static void FilterFlight()
     {
+        Console.Clear();
         Console.WriteLine("Which country do you want to travel to?");
         string country = InputCountry();
         if(flightlist.CheckMem(country))
         {
-            Console.WriteLine("Nothing ");
+            Console.WriteLine("There are no flights to this country.");
+            Console.ReadLine();
+            ShowInsideLoginForUser();
         }
         else
         {
@@ -277,6 +286,7 @@
     public static void SearchSelectFlight()
     {
         FilterFlight();
+        Console.WriteLine("Enter the flight information you want to go on.");
         string country = InputCountry();
         double timeOut = InputTimeOut();
         double timeIn = InputTimeIn();
@@ -288,29 +298,63 @@
             Console.ReadLine();
             ShowInsideLoginForUser();
         }
-        Console.WriteLine("Not found");
+
+        Console.WriteLine("Not found flight");
+        Console.WriteLine("Back to the previous page");
         Console.ReadLine();
     }
     public static void checkbill(string country,double timeOut,double timeIn,double price)
     {
-        Console.WriteLine("Adult");
+        Console.Clear();
+        Console.WriteLine("==========================================================");
+        Console.WriteLine("                Input number of passengers                ");
+        Console.WriteLine("==========================================================");
+        Console.Write("Adult : ");
         double Adult = double.Parse(Console.ReadLine());
-        Console.WriteLine("Child");
+        Console.Write("Child : ");
         double Child = double.Parse(Console.ReadLine());
-        Console.WriteLine("Baby");
+        Console.Write("Baby : ");
         double Baby = double.Parse(Console.ReadLine());
-        double calculateF = CalMoney.CalM(Adult,Child,Baby,price);
-        Console.WriteLine(calculateF);
-        History history = new History(country,timeOut,timeIn,calculateF,Adult,Child,Baby);
-        Program.historylist.AddNewHistory(history);
-
+        double totalprice = CalMoney.CalM(Adult,Child,Baby,price);
+        Console.WriteLine("Total Price : {0:f2}",totalprice);
+        Console.Clear();
+        ConfirmBuy(country,timeOut,timeIn,totalprice,Adult,Child,Baby);
+    }
+    public static void ConfirmBuy(string country,double timeOut,double timeIn,double totalprice,double Adult,double Child,double Baby)
+    {
+        Console.WriteLine("================================================= Check Bill =================================================");
+        Console.WriteLine("Country {0} || Time {1:f2} - {2:f2} || Total Price {3:f2} || Adult {4} Child {5} Baby {6}",country,timeOut,timeIn,totalprice,Adult,Child,Baby);
+        Console.WriteLine("==============================================================================================================");
+        Console.WriteLine("Is it ok to buy?(Y/N)");
+        Console.Write(" : ");
+        string agree = Console.ReadLine();
+        
+        if(agree == "Y")
+        {
+            History history = new History(country,timeOut,timeIn,totalprice,Adult,Child,Baby);
+            Program.historylist.AddNewHistory(history);
+            Console.WriteLine("Order completion");
+            Console.ReadLine();
+            ShowInsideLoginForUser();
+        }
+        else if (agree == "N")
+        {
+            Console.WriteLine("Cancel order");
+            Console.ReadLine();
+            ShowInsideLoginForUser();
+        }
+        Console.WriteLine("Please try again");
+        Console.ReadLine();
+        Console.Clear();
+        ConfirmBuy(country,timeOut,timeIn,totalprice,Adult,Child,Baby);
+        
     }
     public static void ShowInputUser()
     {
         Console.Clear();
-        Console.WriteLine("              Question for Register                ");
-        Console.WriteLine("===================================================");
-        Console.WriteLine("Enter to answer questions or exit ( Write 'exit' ) ");
+        Console.WriteLine("                         Question For Register                          ");
+        Console.WriteLine("========================================================================");
+        Console.WriteLine("Enter to answer questions or exit for back to main menu( Write 'exit' ) ");
         Console.Write(" : ");
         string exit = Console.ReadLine();
         if(exit == "exit")
@@ -342,8 +386,8 @@
     public static void InputInfo()
     {
         Console.Clear();
-        Console.WriteLine("===========  Register User  =============");
-        Console.WriteLine("Enter to continue or exit ( Write 'exit' )");
+        Console.WriteLine("======================  Register User  ========================");
+        Console.WriteLine("Enter to continue or exit for back to main menu( Write 'exit' )");
         string exit = Console.ReadLine();
         if(exit == "exit")
         {
