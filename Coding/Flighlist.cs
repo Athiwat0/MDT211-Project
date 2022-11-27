@@ -12,6 +12,7 @@ class FlightList
     }
     public void AdditionalFlight()
     {
+        Console.Clear();
         Console.WriteLine("=========================================== List Flight ===========================================");
         foreach(Flight flight in this.flightlist)
         {
@@ -44,6 +45,17 @@ class FlightList
         return true;
     }
     public bool SelectFlight(string country,double timeOut,double timeIn,double price)
+    {
+        foreach(Flight flight in this.flightlist)
+        {
+            if(flight.GetCountry()==country&&flight.GetTimeOut()==timeOut&&flight.GetTimeIn()==timeIn&&flight.GetPrice()==price)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool CheckAddFlight(string country,double timeOut,double timeIn,double price)
     {
         foreach(Flight flight in this.flightlist)
         {

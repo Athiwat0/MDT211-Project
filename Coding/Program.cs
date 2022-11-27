@@ -120,6 +120,7 @@
         }
         else if (Guest == "2"||Guest == "YourID")
         {
+            Console.Clear();
             Console.WriteLine("================================================");
             Console.WriteLine("Input ID ( 'exit' for back to main menu )");
             string id = InputID();
@@ -156,22 +157,57 @@
         Console.WriteLine("1.Add flight");
         Console.WriteLine("2.Logout");
         Console.WriteLine("========================");
+        Console.WriteLine("Please Input : ");
         string select = Console.ReadLine();
         if(select=="1")
         {
             Console.Clear();
             Console.WriteLine("====  Add flight  ====");
-            double price = InputPrice();
             string country = InputCountry();
             double timeOut = InputTimeOut();
             double timeIn = InputTimeIn();
+            double price = InputPrice();
             Flight flight = new Flight(country,timeOut,timeIn,price);
+            if(flightlist.CheckAddFlight(country,timeOut,timeIn,price))
+            {
+                Console.Clear();
+                Console.WriteLine("This flight already exists.");
+                Console.WriteLine("Do you want to add?(Y/N only)");
+                string YesNo = Console.ReadLine();
+                if(YesNo == "Y")
+                {
+                    Program.flightlist.AddNewFlight(flight);
+                    Console.WriteLine("===============================");
+                    Console.WriteLine("Complete Add flight");
+                    Console.WriteLine("Enter to Back to menu admin");
+                    Console.ReadLine();
+                    ShowInsideLoginForAdmin();
+                } 
+                else if (YesNo == "N")
+                {
+                    Console.WriteLine("===============================");
+                    Console.WriteLine("Cancel Add Flight");
+                    Console.WriteLine("Enter to Back to menu admin");
+                    Console.ReadLine();
+                    ShowInsideLoginForAdmin();
+                }
+                else
+                {
+                    Console.WriteLine("===============================");
+                    Console.WriteLine("Input 'Y' or 'N' only");
+                    Console.WriteLine("Enter to Back to menu admin");
+                    Console.ReadLine();
+                    ShowInsideLoginForAdmin();
+                }
+            }
 
             Program.flightlist.AddNewFlight(flight);
             Console.WriteLine("===============================");
+            Console.WriteLine("Complete Add flight");
             Console.WriteLine("Enter to Back to menu admin");
             Console.ReadLine();
             ShowInsideLoginForAdmin();
+
         }
         else if(select == "2")
         {
@@ -273,8 +309,6 @@
         if(flightlist.CheckMem(country))
         {
             Console.WriteLine("There are no flights to this country.");
-            Console.ReadLine();
-            ShowInsideLoginForUser();
         }
         else
         {
@@ -443,7 +477,7 @@
     }
     public static string InputNumber()
     {
-        Console.Write("Number : ");
+        Console.Write("ID card : ");
         return Console.ReadLine();
     }
     public static double InputPrice()
