@@ -30,7 +30,7 @@ class Person
     {
         return this.Surname;
     }
-    public string GetNumber()
+    public string GetIDcard()
     {
         return this.Number;
     }

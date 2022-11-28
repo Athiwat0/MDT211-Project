@@ -55,15 +55,5 @@ class FlightList
         }
         return false;
     }
-    public bool CheckAddFlight(string country,double timeOut,double timeIn,double price)
-    {
-        foreach(Flight flight in this.flightlist)
-        {
-            if(flight.GetCountry()==country&&flight.GetTimeOut()==timeOut&&flight.GetTimeIn()==timeIn&&flight.GetPrice()==price)
-            {
-                return true;
-            }
-        }
-        return false;
-    }
+
 }

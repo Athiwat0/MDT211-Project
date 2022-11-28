@@ -168,7 +168,7 @@
             double timeIn = InputTimeIn();
             double price = InputPrice();
             Flight flight = new Flight(country,timeOut,timeIn,price);
-            if(flightlist.CheckAddFlight(country,timeOut,timeIn,price))
+            if(flightlist.SelectFlight(country,timeOut,timeIn,price))
             {
                 Console.Clear();
                 Console.WriteLine("This flight already exists.");
