@@ -1,4 +1,4 @@
-class HistoryList
+public class HistoryList
 {
     private List<History> historylist;
 

@@ -1,4 +1,4 @@
-class History
+public class History
 {
     private string ID;
     private string country;

@@ -1,4 +1,4 @@
-class FlightList
+public class FlightList
 {
     private List<Flight> flightlist;
 

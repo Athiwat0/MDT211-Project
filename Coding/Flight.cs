@@ -1,4 +1,4 @@
-class Flight
+public class Flight
 {
     private string Country;
     private double TimeOut;

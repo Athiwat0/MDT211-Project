@@ -1,4 +1,4 @@
-﻿class Program
+﻿public class Program
 {
     public static PersonList personlist;
     public static FlightList flightlist;
@@ -454,11 +454,6 @@
         Program.personlist.AddNewPerson(person);
     }
 
-
-    public static void PreparePersonListWhenProgramIsLoad()
-    {
-        Program.personlist = new PersonList();
-    }
     
     public static string InputID()
     {
@@ -504,6 +499,10 @@
     {
         Console.Write("Time Out : ");
         return double.Parse(Console.ReadLine());
+    }
+    public static void PreparePersonListWhenProgramIsLoad()
+    {
+        Program.personlist = new PersonList();
     }
     public static void PrepareFlightListWhenProgramIsLoad()
     {

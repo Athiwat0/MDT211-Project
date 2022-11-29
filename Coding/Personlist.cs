@@ -1,4 +1,4 @@
-class PersonList
+public class PersonList
 {
     private List<Person> personlist;
 

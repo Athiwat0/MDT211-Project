@@ -1,4 +1,4 @@
-class Person
+public class Person
 {
     private string ID;
     private string Password;

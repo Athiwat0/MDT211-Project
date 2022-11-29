@@ -1,4 +1,4 @@
-class CalMoney
+public class CalMoney
 {
     public static double CalM(double Adult,double Child,double Baby,double Price)
     {
