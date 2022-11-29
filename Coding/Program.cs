@@ -452,6 +452,7 @@
         Person person = new Person(ID,Password,Name,Surname,Number);
 
         Program.personlist.AddNewPerson(person);
+        PrintMenu();
     }
 
     
