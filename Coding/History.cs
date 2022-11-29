@@ -1,5 +1,6 @@
 class History
 {
+    private string ID;
     private string country;
     private double timeOut;
     private double timeIn;
@@ -8,8 +9,9 @@ class History
     private double Child;
     private double Baby;
 
-    public History(string country,double timeOut,double timeIn,double totalprice,double Adult,double Child,double Baby)
+    public History(string ID,string country,double timeOut,double timeIn,double totalprice,double Adult,double Child,double Baby)
     {
+        this.ID = ID;
         this.country = country;
         this.timeOut = timeOut;
         this.timeIn = timeIn;
@@ -17,6 +19,10 @@ class History
         this.Adult = Adult;
         this.Child = Child;
         this.Baby = Baby;
+    }
+    public string GetID()
+    {
+        return this.ID;
     }
     public string GetCountry()
     {

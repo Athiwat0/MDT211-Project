@@ -140,7 +140,7 @@
                 Console.ReadLine();
                 ShowLoginUser();
             }
-            ShowInsideLoginForUser();
+            ShowInsideLoginForUser(id);
         }
         else if(Guest == "3" || Guest == "exit")
         {
@@ -226,7 +226,7 @@
         Console.WriteLine("2.Filter Flight");
         Console.WriteLine("3.Logout");
         SelectMenuGuest();
-        ShowInsideLoginForUser();
+        ShowInsideLoginForGuest();
     }
     public static void SelectMenuGuest()
     {
@@ -250,7 +250,7 @@
                 break;
         }
     }
-    public static void ShowInsideLoginForUser()
+    public static void ShowInsideLoginForUser(string id)
     {
         Console.Clear();
         Console.WriteLine("=======================================  Menu Information  =======================================");
@@ -261,10 +261,10 @@
         Console.WriteLine("5.History");
         Console.WriteLine("6.Logout");
 
-        SelectMenuUser();
-        ShowInsideLoginForUser();
+        SelectMenuUser(id);
+        ShowInsideLoginForUser(id);
     }
-    public static void SelectMenuUser()
+    public static void SelectMenuUser(string id)
     {
         Console.WriteLine("==================================================================================================");
         Console.Write("Please select choice : ");
@@ -274,25 +274,25 @@
         {
             case 1:
                 country = "United States of America"; timeOut = 08.30; timeIn = 13.30; price = 54000;
-                checkbill(country,timeOut,timeIn,price);
+                checkbill(id,country,timeOut,timeIn,price);
                 Console.ReadLine();
                 break;
             case 2:
                 country = "Australia"; timeOut = 10.30; timeIn = 14.30; price = 48000;
-                checkbill(country,timeOut,timeIn,price);
+                checkbill(id,country,timeOut,timeIn,price);
                 Console.ReadLine();
                 break;
             case 3:
                 Program.flightlist.AdditionalFlight();
-                ShowInsideLoginForUser();
+                ShowInsideLoginForUser(id);
                 break;
             case 4:
-                SearchSelectFlight();
-                ShowInsideLoginForUser();
+                SearchSelectFlight(id);
+                ShowInsideLoginForUser(id);
                 break;
             case 5:
-                Program.historylist.showhistory();
-                ShowInsideLoginForUser();
+                Program.historylist.showhistory(id);
+                ShowInsideLoginForUser(id);
                 break;
             case 6:
                 PrintMenu();
@@ -318,14 +318,14 @@
         }
         Console.ReadLine();
     }
-    public static void SearchSelectFlight()
+    public static void SearchSelectFlight(string id)
     {
         FilterFlight();
         Console.WriteLine("Enter the flight information you want to go on('exit' on country for back to menu)");
         string country = InputCountry();
         if(country == "exit")
         {
-            ShowInsideLoginForUser();
+            ShowInsideLoginForUser(id);
         }
         double timeOut = InputTimeOut();
         double timeIn = InputTimeIn();
@@ -333,16 +333,16 @@
                                                                 
         if(flightlist.SelectFlight(country,timeOut,timeIn,price))//แก้ในวงเล็บปีกกาเอา country timeOut timeIn price ส่งไปยังเมธอดเช็คบิล(สร้างเมธอดใหม่เขึ้นมา)ที่เชื่อมกับคลาสCalculator
         {
-            checkbill(country,timeOut,timeIn,price);
+            checkbill(id,country,timeOut,timeIn,price);
             Console.ReadLine();
-            ShowInsideLoginForUser();
+            ShowInsideLoginForUser(id);
         }
 
         Console.WriteLine("Not found flight");
         Console.WriteLine("Back to the previous page");
         Console.ReadLine();
     }
-    public static void checkbill(string country,double timeOut,double timeIn,double price)
+    public static void checkbill(string id,string country,double timeOut,double timeIn,double price)
     {
         Console.Clear();
         Console.WriteLine("==========================================================");
@@ -357,9 +357,9 @@
         double totalprice = CalMoney.CalM(Adult,Child,Baby,price);
         Console.WriteLine("Total Price : {0:f2}",totalprice);
         Console.Clear();
-        ConfirmBuy(country,timeOut,timeIn,totalprice,Adult,Child,Baby);
+        ConfirmBuy(id,country,timeOut,timeIn,totalprice,Adult,Child,Baby);
     }
-    public static void ConfirmBuy(string country,double timeOut,double timeIn,double totalprice,double Adult,double Child,double Baby)
+    public static void ConfirmBuy(string id,string country,double timeOut,double timeIn,double totalprice,double Adult,double Child,double Baby)
     {
         Console.WriteLine("================================================= Check Bill =================================================");
         Console.WriteLine("Country {0} || Time {1:f2} - {2:f2} || Total Price {3:f2} || Adult {4} Child {5} Baby {6}",country,timeOut,timeIn,totalprice,Adult,Child,Baby);
@@ -370,22 +370,22 @@
         
         if(agree == "Y")
         {
-            History history = new History(country,timeOut,timeIn,totalprice,Adult,Child,Baby);
+            History history = new History(id,country,timeOut,timeIn,totalprice,Adult,Child,Baby);
             Program.historylist.AddNewHistory(history);
             Console.WriteLine("Order completion");
             Console.ReadLine();
-            ShowInsideLoginForUser();
+            ShowInsideLoginForUser(id);
         }
         else if (agree == "N")
         {
             Console.WriteLine("Cancel order");
             Console.ReadLine();
-            ShowInsideLoginForUser();
+            ShowInsideLoginForUser(id);
         }
         Console.WriteLine("Please try again");
         Console.ReadLine();
         Console.Clear();
-        ConfirmBuy(country,timeOut,timeIn,totalprice,Adult,Child,Baby);
+        ConfirmBuy(id,country,timeOut,timeIn,totalprice,Adult,Child,Baby);
         
     }
     public static void ShowInputUser()
