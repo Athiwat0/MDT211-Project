@@ -3,7 +3,7 @@
     public static PersonList personlist;
     public static FlightList flightlist;
     public static HistoryList historylist;
-
+     
     public static void Main(string[] args)
     {
         PrepareFlightListWhenProgramIsLoad();
@@ -11,6 +11,11 @@
         PrepareHistoryListWhenProgramIsLoad();
         PrintMenu();
     }
+     
+//หน้าเมนูหลักของโปรแกรม
+//หน้าเมนูหลักของโปรแกรม
+//หน้าเมนูหลักของโปรแกรม
+     
     public static void PrintMenu()
     {
         PrintListMenuLogout();
@@ -50,6 +55,11 @@
                 break;
         }
     }
+     
+//หน้าเมนูล็อกอิน
+//หน้าเมนูล็อกอิน
+//หน้าเมนูล็อกอิน
+     
     public static void ShowLogin()
     {
         string[] IDAdmin = new string[] {"Pan","Mick","Deil"};
@@ -104,6 +114,11 @@
         Console.Clear();
         ShowLogin();
     }
+     
+//หน้าเมนูล็อกอินของ User
+//หน้าเมนูล็อกอินของ User
+//หน้าเมนูล็อกอินของ User
+     
     public static void ShowLoginUser()
     {
         Console.Clear();
@@ -150,6 +165,11 @@
         Console.ReadLine();
         ShowLoginUser();
     }
+     
+//หน้าเมนูล็อกอิน Admin กับเมนูของ Admin
+//หน้าเมนูล็อกอิน Admin กับเมนูของ Admin
+//หน้าเมนูล็อกอิน Admin กับเมนูของ Admin
+     
     public static void ShowInsideLoginForAdmin()
     {
         Console.Clear();
@@ -219,6 +239,11 @@
         ShowInsideLoginForAdmin();
 
     }
+     
+//หน้าเมนูของ Guest
+//หน้าเมนูของ Guest
+//หน้าเมนูของ Guest
+     
     public static void ShowInsideLoginForGuest()
     {
         Console.Clear();
@@ -250,6 +275,11 @@
                 break;
         }
     }
+     
+//หน้าเมนูของ User
+//หน้าเมนูของ User
+//หน้าเมนูของ User
+     
     public static void ShowInsideLoginForUser(string id)
     {
         Console.Clear();
@@ -388,6 +418,11 @@
         ConfirmBuy(id,country,timeOut,timeIn,totalprice,Adult,Child,Baby);
         
     }
+     
+//หน้าเมนูคำถาม Register
+//หน้าเมนูคำถาม Register
+//หน้าเมนูคำถาม Register
+     
     public static void ShowInputUser()
     {
         Console.Clear();
@@ -422,6 +457,11 @@
         }
         InputInfo();
     }
+     
+//หน้าเมนูกรอกข้อมูล Register
+//หน้าเมนูกรอกข้อมูล Register
+//หน้าเมนูกรอกข้อมูล Register
+     
     public static void InputInfo()
     {
         Console.Clear();
@@ -454,7 +494,10 @@
         Program.personlist.AddNewPerson(person);
         PrintMenu();
     }
-
+     
+//หน้าที่แสดงและรับค่าตอนกรอกข้อมูล Register
+//หน้าที่แสดงและรับค่าตอนกรอกข้อมูล Register
+//หน้าที่แสดงและรับค่าตอนกรอกข้อมูล Register
     
     public static string InputID()
     {
